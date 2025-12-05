@@ -2,268 +2,141 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Manikandan R | Cyber Security Analyst Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>DevOps Challenge</title>
 
 <style>
     body {
         margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background: #e0e5ec;
-        color: #333;
+        background: #0b0f19;
+        font-family: "Segoe UI", sans-serif;
+        color: #e9eefc;
+        overflow: hidden;
     }
 
-    /* Neumorphism base */
-    .neo {
-        background: #e0e5ec;
-        box-shadow: 8px 8px 16px #b8bec7,
-                    -8px -8px 16px #ffffff;
-        border-radius: 20px;
+    /* Animated glowing background gradients */
+    .bg-glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.35;
+        animation: drift 18s infinite alternate ease-in-out;
+        z-index: -10;
     }
 
-    header {
+    .blue { background: #3a7bd5; top: -10%; left: -10%; }
+    .teal { background: #2bd9d9; top: 40%; left: 70%; animation-duration: 22s; }
+    .green { background: #15ff99; top: 70%; left: 20%; animation-duration: 26s; }
+    .orange { background: #ff8f3c; top: 10%; left: 60%; animation-duration: 20s; }
+
+    @keyframes drift {
+        from { transform: translateY(0px) translateX(0px); }
+        to { transform: translateY(80px) translateX(40px); }
+    }
+
+    /* Kubernetes hexagon icons floating */
+    .kube-hex {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        background: rgba(0,140,255,0.15);
+        border: 2px solid rgba(0,150,255,0.35);
+        clip-path: polygon(25% 5%, 75% 5%, 95% 50%, 75% 95%, 25% 95%, 5% 50%);
+        animation: floatHex 12s infinite ease-in-out;
+        filter: blur(1px);
+    }
+
+    @keyframes floatHex {
+        0% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+        50% { transform: translateY(-40px) rotate(20deg); opacity: 0.8; }
+        100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    }
+
+    .hex1 { top: 20%; left: 10%; }
+    .hex2 { top: 60%; left: 80%; animation-delay: -2s; }
+    .hex3 { top: 75%; left: 35%; animation-delay: -4s; }
+
+    /* Title */
+    #title {
         text-align: center;
-        padding: 60px 20px;
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-top: 60px;
+        letter-spacing: 4px;
+        background: linear-gradient(to right, #00d2ff, #3a7bd5);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
     }
 
-    header h1 {
-        font-size: 3rem;
-        margin: 0;
-    }
-
-    header p {
-        font-size: 1.2rem;
-        opacity: 0.8;
-    }
-
-    nav {
+    /* Container for statements */
+    .wrapper {
         display: flex;
         justify-content: center;
-        gap: 30px;
-        margin-top: 20px;
+        gap: 40px;
+        margin-top: 80px;
     }
 
-    nav a {
-        text-decoration: none;
-        color: #333;
-        font-weight: 500;
-        padding: 10px 20px;
-        border-radius: 15px;
-        transition: .2s;
-    }
-
-    nav a:hover {
-        box-shadow: inset 8px 8px 16px #b8bec7,
-                    inset -8px -8px 16px #ffffff;
-    }
-
-    section {
-        width: 90%;
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 30px;
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .about, .skills, .projects, .contact {
-        padding: 30px;
-    }
-
-    .flex-center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .skills-list, .project-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    .skill, .project {
-        padding: 25px;
-        text-align: center;
+    .card {
+        width: 40%;
+        background: rgba(255,255,255,0.04);
+        padding: 35px;
         border-radius: 20px;
-        transition: .25s;
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 0 40px rgba(0,150,255,0.25);
+        transition: 0.3s ease;
     }
 
-    .skill:hover, .project:hover {
-        transform: translateY(-5px);
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 50px rgba(0,200,255,0.5);
     }
 
-    .skill i, .project i {
-        font-size: 40px;
-        margin-bottom: 10px;
-        color: #444;
-    }
-
-    /* Contact Form */
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    input, textarea {
-        padding: 15px;
-        border: none;
-        border-radius: 15px;
-        font-size: 1rem;
-        outline: none;
-        background: #e0e5ec;
-        box-shadow: inset 4px 4px 10px #b8bec7,
-                    inset -4px -4px 10px #ffffff;
-    }
-
-    button {
-        padding: 15px;
-        border: none;
-        border-radius: 20px;
-        font-size: 1.1rem;
+    .label {
+        font-size: 1.6rem;
         font-weight: bold;
-        cursor: pointer;
-        background: #e0e5ec;
-        box-shadow: 8px 8px 16px #b8bec7,
-                    -8px -8px 16px #ffffff;
-        transition: .25s;
+        color: #00c3ff;
+        margin-bottom: 12px;
     }
 
-    button:hover {
-        box-shadow: inset 8px 8px 16px #b8bec7,
-                    inset -8px -8px 16px #ffffff;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
-        margin-top: 30px;
-        opacity: .7;
+    .text {
+        font-size: 1.4rem;
+        opacity: 0.9;
     }
 </style>
+
 </head>
 <body>
 
-<header>
-    <h1>Manikandan R</h1>
-    <p>Aspiring Cyber Security Analyst</p>
+<!-- Glowing animated background blobs -->
+<div class="bg-glow blue"></div>
+<div class="bg-glow teal"></div>
+<div class="bg-glow green"></div>
+<div class="bg-glow orange"></div>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+<!-- Floating Kubernetes hexagons -->
+<div class="kube-hex hex1"></div>
+<div class="kube-hex hex2"></div>
+<div class="kube-hex hex3"></div>
 
-<section id="about" class="about neo">
-    <h2>About Me</h2>
-    <p>
-        Hello! I'm <b>Manikandan R</b>, an aspiring Cyber Security Analyst passionate about ethical hacking,
-        digital forensics, penetration testing and network defense.  
-        I love exploring new vulnerabilities, securing systems, and learning advanced cyber-security tools.
-    </p>
-    <p>
-        My goal is to become a professional security analyst who helps organizations protect their digital assets.
-    </p>
-</section>
+<!-- Title -->
+<div id="title">DevOps Challenge</div>
 
-<section id="skills" class="skills neo">
-    <h2>Skills</h2>
-
-    <div class="skills-list">
-        <div class="skill neo">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h3>Penetration Testing</h3>
-        </div>
-
-        <div class="skill neo">
-            <i class="fa-solid fa-network-wired"></i>
-            <h3>Network Security</h3>
-        </div>
-
-        <div class="skill neo">
-            <i class="fa-solid fa-bug"></i>
-            <h3>Bug Hunting</h3>
-        </div>
-
-        <div class="skill neo">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <h3>Digital Forensics</h3>
-        </div>
-
-        <div class="skill neo">
-            <i class="fa-solid fa-code"></i>
-            <h3>Python Scripting</h3>
-        </div>
-
-        <div class="skill neo">
-            <i class="fa-solid fa-lock"></i>
-            <h3>Vulnerability Analysis</h3>
-        </div>
+<!-- Two statement cards -->
+<div class="wrapper">
+    <div class="card">
+        <div class="label">Statement A</div>
+        <div class="text" id="statementA">A. The default GitHub runner environment can run bash commands.</div>
     </div>
-</section>
 
-<section id="projects" class="projects neo">
-    <h2>Projects</h2>
-
-    <div class="project-list">
-
-        <div class="project neo">
-            <i class="fa-solid fa-laptop-code"></i>
-            <h3>Vulnerability Scanner</h3>
-            <p>Python based vulnerability scanner for websites & networks.</p>
-        </div>
-
-        <div class="project neo">
-            <i class="fa-solid fa-fingerprint"></i>
-            <h3>Digital Forensic Toolkit</h3>
-            <p>File recovery, metadata extraction & forensic analysis tools.</p>
-        </div>
-
-        <div class="project neo">
-            <i class="fa-solid fa-wifi"></i>
-            <h3>WiFi Attack Simulation Lab</h3>
-            <p>Hands-on lab for wireless security & penetration testing.</p>
-        </div>
-
-        <div class="project neo">
-            <i class="fa-solid fa-user-secret"></i>
-            <h3>OSINT Recon Automation</h3>
-            <p>Automated OSINT tool to gather online intelligence.</p>
-        </div>
-
+    <div class="card">
+        <div class="label">Statement B</div>
+        <div class="text" id="statementB">B. GitHub runners cannot execute scripts.</div>
     </div>
-</section>
-
-<section id="contact" class="contact neo">
-    <h2>Contact Me</h2>
-
-    <form>
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Your Email">
-        <textarea rows="5" placeholder="Your Message"></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</section>
-
-<footer>
-    © 2025 Manikandan R | Cyber Security Portfolio
-</footer>
+</div>
 
 </body>
 </html>
-
-
